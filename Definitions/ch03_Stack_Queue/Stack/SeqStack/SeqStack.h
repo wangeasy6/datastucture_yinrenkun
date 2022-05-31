@@ -4,6 +4,9 @@ using namespace std;
 
 const int stackIncreament = 20; //栈溢出时扩展空间的增量
 
+/**
+ * @brief 顺序栈，使用一维数组存储
+ */
 template <typename T>class SeqStack{
 public:
 	SeqStack(int sz =50);
@@ -55,13 +58,12 @@ template <typename T>void SeqStack<T>::overflowProcess(){	//私有函数：扩充栈的存
 	elements = newArray;
 }
 
-
 template <typename T>void SeqStack<T>::Push(const T &x){
 	if (IsFull())	overflowProcess();
 	elements[++top] = x;  // top++; elements[top] = x;
 }
 
-
+/// @return 栈空时返回 false，否则返回 true
 template <typename T>bool SeqStack<T>::Pop(T &x){
 	if (IsEmpty()){
 		return false;
@@ -70,7 +72,7 @@ template <typename T>bool SeqStack<T>::Pop(T &x){
 	return true; 
 }
 
-
+/// @return 栈空时返回 false，否则返回 true
 template <typename T>bool SeqStack<T>::getTop(T &x)const{
 	if (IsEmpty()){
 		return false;

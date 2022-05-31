@@ -6,6 +6,9 @@ using namespace std;
 
 const int DefaultPQSize = 50;
 
+/**
+ * @brief ◊Ó–°”≈œ»∂”¡–£® ˝◊È µœ÷£©
+ */
 template <typename T>class PQueue{
 public:
 	PQueue(int sz = DefaultPQSize);
@@ -74,7 +77,7 @@ template <typename T>bool PQueue<T>::DeQueue(T& x){//≤…”√œﬂ–‘±Ì∑Ω Ω£¨≤ª≤…”√∂”∑Ω 
 	if (count == 0)	return false;
 	x = pqelements[0];
 	for (int i = 1; i < count; i++)
-		pqelements[i-1\ = pqelements[i];
+		pqelements[i-1] = pqelements[i];
 	count--;
 	return true;
 }

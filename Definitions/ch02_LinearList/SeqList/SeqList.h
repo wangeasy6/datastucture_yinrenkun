@@ -1,8 +1,6 @@
 #ifndef SEQLIST_H
 #define SEQLIST_H
 
-// Ë³Ðò±í
-
 #include <iostream>
 #include <cstdlib>
 #include <cassert>
@@ -10,8 +8,8 @@ using namespace std;
 
 const int defaultSize = 100;
 
-template <typename T>
-class SeqList{
+/// Ë³Ðò±í
+template <typename T>class SeqList{
 protected:
 	T *data;
 	int maxSize;

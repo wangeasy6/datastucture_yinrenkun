@@ -16,6 +16,10 @@ template <typename T>struct LinkNode{
 	}
 };
 
+
+/**
+ * @brief 链式队列
+ */
 template <typename T>class LinkedQueue{//无头结点
 public:
 	LinkedQueue(){

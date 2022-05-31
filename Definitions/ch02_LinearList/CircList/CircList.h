@@ -49,17 +49,11 @@ public:
 	CircLinkNode<T> *getHead()const{//±¾º¯Êı»áÆÆ»µ·â×°ĞÔ
 		return first;
 	}
-	/** @param x: Æ¥Åäx */
 	CircLinkNode<T> *Search(T x);
-	/** @param i: ´Ó1¿ªÊ¼ */
 	CircLinkNode<T> *Locate(int i)const;
-	/** @param i: ´Ó1¿ªÊ¼ */
 	bool getData(int i,T&x)const;
-	/** @param i: ´Ó1¿ªÊ¼ */
 	void setData(int i, T &x);
-	/** @param i: ´Ó0¿ªÊ¼£¬xµ½i+1µÄÎ»ÖÃ */
 	bool Insert(int i, T &x);
-	/** @param i: ´Ó1¿ªÊ¼ */
 	bool Remove(int i, T &x);
 	bool IsEmpty()const{
 		return (first->link == first)?true:false;
@@ -67,9 +61,8 @@ public:
 	bool IsFull()const{//Á´±í²»»áÂú£¬½ö½öÎªÁËÓëË³Ğò±íÒ»ÖÂ£¬±£Áô±¾º¯Êı
 		return false;
 	}
-	/** ´ıÊµÏÖ */
 	void Sort();
-	void Inverse();//²»Òª·µ»Ø
+	void Inverse();
 	void input(T endTag, InsMod im = INR);
 	void output();
 	CircList<T> &operator = (CircList<T> &L);
@@ -137,6 +130,8 @@ template <typename T>int CircList<T>::Length()const{
 	return count;
 }
 
+
+/** @param x: Æ¥Åäx */
 template <typename T>CircLinkNode<T> *CircList<T>::Search(T x){//¸Ä
 	CircLinkNode<T> *current = first->link;
 	while (current != first && current->data != x){
@@ -146,6 +141,7 @@ template <typename T>CircLinkNode<T> *CircList<T>::Search(T x){//¸Ä
 	return current;
 }
 
+/** @param i: ´Ó1¿ªÊ¼ */
 template <typename T>CircLinkNode<T> *CircList<T>::Locate(int i)const{
 	if (i < 0){
 		return NULL;
@@ -162,6 +158,7 @@ template <typename T>CircLinkNode<T> *CircList<T>::Locate(int i)const{
 	return (k == i)?current:NULL;
 }
 
+/** @param i: ´Ó1¿ªÊ¼ */
 template <typename T>bool CircList<T>::getData(int i,T&x)const{//¸Ä£¬Óë½Ì²Ä¿±ÎóÒ»ÖÂ
 	if (i <= 0){
 		return false;
@@ -176,6 +173,7 @@ template <typename T>bool CircList<T>::getData(int i,T&x)const{//¸Ä£¬Óë½Ì²Ä¿±ÎóÒ
 	}
 }
 
+/** @param i: ´Ó1¿ªÊ¼ */
 template <typename T>void CircList<T>::setData(int i, T &x){//ĞŞ¸ÄÖ¸¶¨½áµãÊı¾İ
 	if (i <= 0)	return;
 	CircLinkNode<T> *current = Locate(i);
@@ -183,6 +181,7 @@ template <typename T>void CircList<T>::setData(int i, T &x){//ĞŞ¸ÄÖ¸¶¨½áµãÊı¾İ
 	else current->data = x;
 }
 
+/** @param i: ´Ó0¿ªÊ¼£¬xµ½i+1µÄÎ»ÖÃ */
 template <typename T>bool CircList<T>::Insert(int i, T &x){//ÓÉĞÂÊı¾İx½¨Á¢µÄ½áµã²åÈëÔÚµÚiºÅ½áµãÖ®ºó
 	CircLinkNode<T> *current = Locate(i);
 	if (current == NULL){
@@ -201,6 +200,7 @@ template <typename T>bool CircList<T>::Insert(int i, T &x){//ÓÉĞÂÊı¾İx½¨Á¢µÄ½áµã
 	return true;
 }
 
+/** @param i: ´Ó1¿ªÊ¼ */
 template <typename T>bool CircList<T>::Remove(int i, T &x){//É¾³ı½áµã£¬²¢ÌáÈ¡Êı¾İ
 	CircLinkNode<T> *current = Locate(i-1);//¶¨Î»ÔÚ´ıÉ¾³ı½áµãµÄÇ°Ò»½áµã
 	if (!current || current->link == first)	return false;
@@ -280,6 +280,7 @@ template <typename T>void CircList<T>::inputRear(T endTag){//ÏòºóÉú³É£¬ÒÑ¸Ä
 	last->link = first;
 }
 
+/** @todo ´ıÊµÏÖ */
 template <typename T>void CircList<T>::Sort()
 {
 }

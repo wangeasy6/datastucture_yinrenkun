@@ -10,6 +10,9 @@ template <typename T>struct StackNode{
 	StackNode(T d = 0, StackNode<T> *next = NULL):link(next),data(d){}
 };
 
+/**
+ * @brief 链式栈（栈顶位于表头）
+ */
 template <typename T>class LinkedStack{
 private:
 	StackNode<T> *top;

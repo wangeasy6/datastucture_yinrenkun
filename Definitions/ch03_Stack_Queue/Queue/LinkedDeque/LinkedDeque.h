@@ -1,8 +1,10 @@
 #ifndef LINKEDDEQUE_H
 #define LINKEDDEQUE_H
-#include "LinkedQueue.h"
-//双端队列
+#include "..\LinkedQueue\LinkedQueue.h"
 
+/**
+ * @brief 双端队列（链表表示）
+ */
 template <typename T>
 class LinkedDeque:public LinkedQueue<T>{
 public:
@@ -10,11 +12,13 @@ public:
 	~LinkedDeque(){};
 	bool getHead(T &x)const;
 	bool getTail(T &x)const;
+	/// @brief 同 EnQueueTail
 	bool EnQueue(const T &x){
 		return EnQueueTail(x);
 	}
 	bool EnQueueHead(const T &x);
 	bool EnQueueTail(const T &x);
+	/// @brief 同 DeQueueHead
 	bool DeQueue(T &x){
 		return DeQueueHead(x);
 	}
@@ -30,20 +34,20 @@ template <typename T>bool LinkedDeque<T>::getHead(T &x)const{
 }
 
 template <typename T>bool LinkedDeque<T>::getTail(T &x)const{
-	if (!front)
+	if (!this->front)
 	{
 		return false;
 	}
-	x = rear->data;
+	x = this->rear->data;
 	return true;
 }
 
 template <typename T>bool LinkedDeque<T>::EnQueueHead(const T &x){
 	LinkNode<T> *p = new LinkNode<T>(x);
 	if (!p)	return false;
-	p->link = front;
-	front = p;
-	if (!front->link)	rear = front;
+	p->link = this->front;
+	this->front = p;
+	if (!this->front->link)	this->rear = this->front;
 	return true;
 }
 
@@ -59,17 +63,17 @@ template <typename T>bool LinkedDeque<T>::DeQueueHead(T &x){
 }
 
 template <typename T>bool LinkedDeque<T>::DeQueueTail(T &x){
-	if (!front)	return false;
-	if (front == rear){
-		x = rear->data;
-		front = rear = NULL;
+	if (!this->front)	return false;
+	if (this->front == this->rear){
+		x = this->rear->data;
+		this->front = this->rear = NULL;
 		return true;
 	}
-	LinkNode<T> *p = front;
-	while (p->link != rear)	p = p->link;
-	x = rear->data;
+	LinkNode<T> *p = this->front;
+	while (p->link != this->rear)	p = p->link;
+	x = this->rear->data;
 	p->link = NULL;
-	rear = p;
+	this->rear = p;
 	return true;
 }
 #endif
