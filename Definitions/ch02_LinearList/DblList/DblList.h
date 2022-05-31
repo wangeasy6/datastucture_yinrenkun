@@ -1,17 +1,7 @@
-/**
-  * @file 文件名（*.h/*.c）
-  * @brief 该模块功能的简介。
-  * @details 使用该模块有哪些细节注意等。
-  * @author 创建该文件的人名。
-  * @data 该文件的创建日期（2020-03-10）。
-  * @version 文件当前的版本号（V1.0.0）。
-  * @copyright 版权所属公司。
-  */
-
 #ifndef DBLLIST_H
 #define DBLLIST_H
 
-// 双向链表（附加头结点）
+//
 
 #include <iostream>
 #include <cassert>
@@ -31,6 +21,7 @@ template <typename T>struct DblNode{
 	}
 };
 
+/** @brief 双向链表（附加头结点） */
 template <typename T>class DblList{
 public:
 	DblList(T uniqueVal){

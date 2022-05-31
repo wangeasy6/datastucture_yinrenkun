@@ -1,7 +1,3 @@
-/**
- * @brief EasyTest
-**/
-
 #ifndef CIRCLIST_H
 #define CIRCLIST_H
 
@@ -14,6 +10,9 @@ enum InsMod {INF, INR};//向前还是向后生成
 #endif
 using namespace std;
 
+/**
+  * @brief 单结点（data+link）
+  */
 template <typename T>class CircLinkNode{
 public:
 	T data;
@@ -27,6 +26,9 @@ public:
 	}
 };
 
+/**
+  * @brief 循环链表
+  */
 template <typename T>class CircList{
 public:
 	CircList(){//建立有附加头结点的空环链表
@@ -47,11 +49,17 @@ public:
 	CircLinkNode<T> *getHead()const{//本函数会破坏封装性
 		return first;
 	}
+	/** @param x: 匹配x */
 	CircLinkNode<T> *Search(T x);
+	/** @param i: 从1开始 */
 	CircLinkNode<T> *Locate(int i)const;
+	/** @param i: 从1开始 */
 	bool getData(int i,T&x)const;
+	/** @param i: 从1开始 */
 	void setData(int i, T &x);
+	/** @param i: 从0开始，x到i+1的位置 */
 	bool Insert(int i, T &x);
+	/** @param i: 从1开始 */
 	bool Remove(int i, T &x);
 	bool IsEmpty()const{
 		return (first->link == first)?true:false;
@@ -59,6 +67,7 @@ public:
 	bool IsFull()const{//链表不会满，仅仅为了与顺序表一致，保留本函数
 		return false;
 	}
+	/** 待实现 */
 	void Sort();
 	void Inverse();//不要返回
 	void input(T endTag, InsMod im = INR);
