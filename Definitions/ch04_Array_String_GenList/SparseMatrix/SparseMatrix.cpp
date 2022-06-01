@@ -12,7 +12,7 @@ template <typename E>SparseMatrix<E>::SparseMatrix(int mT, int Rw, int Cl){
 	assert(smArray);
 }
 
-template <typename E>SparseMatrix<E>::SparseMatrix(SparseMatrix<E>& x){
+template <typename E>SparseMatrix<E>::SparseMatrix(const SparseMatrix<E>& x){
     Rows = x.Rows;
 	Cols = x.Cols;
 	Terms=x.Terms;         //添加
@@ -23,7 +23,11 @@ template <typename E>SparseMatrix<E>::SparseMatrix(SparseMatrix<E>& x){
 	for(i=0;i<=Terms;i++) smArray[i]=x.smArray[i];
 }
 
-template <typename E>SparseMatrix<E> SparseMatrix<E>::Transpose(){
+/**
+ * @brief 转置运算
+ */
+template <typename E>
+SparseMatrix<E> SparseMatrix<E>::Transpose(){
 	SparseMatrix<E> B(maxTerms,Cols,Rows);                    //修改
 	if (Terms > 0){
 		int CurrentB = 0;
@@ -43,7 +47,10 @@ template <typename E>SparseMatrix<E> SparseMatrix<E>::Transpose(){
 	return B;
 }
 
-template <typename E>SparseMatrix<E> SparseMatrix<E>::FastTranspos(){//快速转置
+/**
+ * @brief 快速转置
+ */
+template <typename E>SparseMatrix<E> SparseMatrix<E>::FastTranspos(){
     int *rowSize = new int[Cols];       //行元素数量数组
     int *rowStart = new int[Cols];      //行起始位置数组
 	SparseMatrix<E> /*B(Rows,Cols,Terms)*/B(maxTerms,Cols,Rows);
@@ -74,6 +81,10 @@ template <typename E>SparseMatrix<E> SparseMatrix<E>::FastTranspos(){//快速转置
 	return B;
 }
 
+/**
+ * @brief 矩阵相加
+ * @param b: 需要行列和当前矩阵相等
+ */
 template <typename E>SparseMatrix<E> SparseMatrix<E>::Add(SparseMatrix<E> &b){
 	SparseMatrix<E> result(Terms+b.Terms,Rows,Cols);
 	if ( Rows != b.Rows || Cols != b.Cols){//两矩阵规格不一致，不能相加
@@ -111,6 +122,10 @@ template <typename E>SparseMatrix<E> SparseMatrix<E>::Add(SparseMatrix<E> &b){
 	return result;
 }
 
+/**
+ * @brief 矩阵相乘
+ * @details \f$ C[i][j] = \sum (a[i][k] * b[k][j]) \f$
+ */
 template <typename E> SparseMatrix<E> SparseMatrix<E>::Multiply(SparseMatrix<E> &b){
 	SparseMatrix<E> result(Rows*b.Cols/2,Rows, b.Cols);//实用程序可以先分配比较小的空间，以后安需重新分配
 	if (Cols != b.Rows)	{

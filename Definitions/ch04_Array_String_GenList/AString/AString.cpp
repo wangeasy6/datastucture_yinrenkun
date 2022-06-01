@@ -29,8 +29,10 @@ AString::AString(const AString &ob){
 	strcpy(ch, ob.ch);
 }
 
+/**
+ * @brief 从串中第 pos 个位置起连续提取 len 个字符形成子串返回
+ */
 AString AString::substr(int pos, int len){
-	//从串中第 pos 个位置起连续提取 len 个字符形成子串返回
 	AString temp(maxSize);
 	if (pos >= 0 && pos+len-1 < maxSize && len > 0){
 		if (pos+len-1 >= curLength){
@@ -45,8 +47,10 @@ AString AString::substr(int pos, int len){
 	return temp;
 }
 
+/**
+ * @brief 从串中第 pos 个位置起连续提取 len 个字符形成子串返回
+ */
 AString AString::operator () (int pos, int len){
-	//从串中第 pos 个位置起连续提取 len 个字符形成子串返回
 	AString temp(maxSize);
 	if (pos >= 0 && pos+len-1 < maxSize && len > 0){
 		if (pos+len-1 >= curLength){
@@ -61,6 +65,9 @@ AString AString::operator () (int pos, int len){
 	return temp;
 }
 
+/**
+ * @brief 串赋值
+ */
 AString& AString::operator = (const AString &ob){
 	if (&ob != this){
 		delete []ch;              //先清后建
@@ -74,11 +81,17 @@ AString& AString::operator = (const AString &ob){
 	return *this;
 }
 
-char& AString::operator [] (int i){	//下标运算符重载：取当前串*this的第i个字符
+/**
+ * @brief 下标运算符重载：取当前串*this的第i个字符
+ */
+char& AString::operator [] (int i){
 	assert(i >= 0 && i < curLength);
 	return ch[i];
 }
 
+/**
+ * @brief 串连接
+ */
 AString AString::operator + (const AString& ob){
 	int n = curLength + ob.curLength;
 	int m = (maxSize >= n) ? maxSize : n;
@@ -90,6 +103,9 @@ AString AString::operator + (const AString& ob){
 	return temp;
 }
 
+/**
+ * @brief 串连接
+ */
 AString& AString::operator += (const AString& ob){
 	char *temp = ch;             //*this字符串由temp保留
 	int n = curLength + ob.curLength;
@@ -105,7 +121,11 @@ AString& AString::operator += (const AString& ob){
 	return *this;
 }
 
-int AString::Find(AString &pat, int k)const{//从第K个（下标）字符开始
+/**
+ * @brief 匹配子串
+ * #details 从k开始
+ */
+int AString::Find(AString &pat, int k)const{
 	int i, j, n = curLength, m = pat.curLength;
 	for (i = k; i <= n-m; i++){ 
 		for (j = 0; j < m; j++){
@@ -116,6 +136,9 @@ int AString::Find(AString &pat, int k)const{//从第K个（下标）字符开始
 	return -1;	 //在*this中找不到它
 }
 
+/**
+ * @brief 匹配字串（KMP算法）
+ */
 int AString::fastFind(AString &pat, int k, int next[])const{
 	int posP = 0, posT = k;
 	int lengthP = pat.curLength;	//模式串长度
@@ -144,10 +167,11 @@ void AString::getNext(int next[]){
 	}
 }
 
-// 字符串替换函数：
-// 若t是当前串的子串，则用v替换t在当前串中的所有出现；
-// 若t不是当前串的子串，则当前串保持不变。
-// 该函数返回当前串的引用。
+/**
+ * @brief 字符串替换
+ * @details 若t是当前串的子串，则用v替换t在当前串中的所有出现；若t不是当前串的子串，则当前串保持不变。
+ * @return 返回当前串的引用
+ */
 AString& AString::replace(AString &t, AString &v){
 	int *next = new int[t.Length()+1];//没有+1使用中出界，析构时有问题
 	t.getNext(next);

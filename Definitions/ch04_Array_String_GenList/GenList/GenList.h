@@ -6,7 +6,9 @@
 #include <cstdlib>
 #include "SeqList.h"
 
-// 广义表结点的类结构定义
+/**
+ * @brief 广义表结点类
+ */
 template <typename T>class GenListNode{
 public:
 	GenListNode(){
@@ -32,7 +34,9 @@ public:
 	}info;
 };
 
-// 广义表返回值的类结构定义
+/**
+ * @brief 广义表返回值类
+ */
 template <typename T>class Items{
 public:
 	int utype;					// =0/1/2
@@ -53,7 +57,9 @@ public:
 	}
 };
 
-// 广义表类的定义
+/**
+ * @brief 广义表
+ */
 template <typename T>class GenList{
 public:
 	GenList();

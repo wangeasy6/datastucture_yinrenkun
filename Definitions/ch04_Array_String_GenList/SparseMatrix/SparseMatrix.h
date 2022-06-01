@@ -6,8 +6,9 @@ using namespace std;
 
 const int drows = 6,  dcols = 7, dterms = 9;
 
+/// @brief 三元组<row, column, value>
 template<typename E>
-struct Triple		//三元组
+struct Triple
 {
     int row, col;	//非零元素行号/列号
     E value;		//非零元素的值
@@ -23,10 +24,13 @@ struct Triple		//三元组
 	}
 };		
 
+/**
+ * @brief 稀疏矩阵
+ */
 template <typename E>class SparseMatrix{//稀疏矩阵定义与教材略有不同
 public: 
     SparseMatrix( int mT = dterms, int Rw = drows, int Cl = dcols);
-	SparseMatrix(SparseMatrix<E>& x);//有动态分配，必须定义复制构造函数和析构函数
+	SparseMatrix(const SparseMatrix<E>& x);//改.有动态分配，必须定义复制构造函数和析构函数
 	~SparseMatrix(){
 		delete []smArray;
 	}
@@ -60,7 +64,7 @@ public:
 		}
 		return in;
 	}
-	SparseMatrix<E> & operator = (SparseMatrix<E> &x){ //改
+	SparseMatrix<E> & operator = (const SparseMatrix<E> &x){ //改
 		Rows = x.Rows;
 		Cols = x.Cols;
 		Terms=x.Terms;
@@ -74,6 +78,7 @@ public:
 		return /*des*/*this;
 	}
 private:
+	// 行数，列数，非零元素个数
     int Rows, Cols, Terms;
     Triple<E> *smArray;
 	int maxTerms;

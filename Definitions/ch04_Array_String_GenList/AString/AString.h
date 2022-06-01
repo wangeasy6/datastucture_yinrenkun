@@ -5,11 +5,15 @@
 using namespace std;
 
 const int defaultSize=128;
+
+/**
+ * @brief 字符串类（数组实现）
+ */
 class AString{
 private:
-	char *ch;
-	int curLength;
-	int maxSize;
+	char *ch;					// 串存放数组
+	int curLength;				// 串的实际长度
+	int maxSize;				// 存放数组的最大长度
 public:
 	AString(int sz = defaultSize);
 	AString(const char *init );
