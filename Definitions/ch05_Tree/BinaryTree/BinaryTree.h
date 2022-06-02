@@ -5,9 +5,12 @@
 #include <cassert>
 #include <iostream>
 using namespace std;
-#include"LinkedStack.h"
-#include"LinkedQueue.h"
+#include "LinkedStack.h"
+#include "LinkedQueue.h"
 
+/**
+ * @brief 二叉树结点 <data, *lChild, *rChild>
+ */
 template <typename T>struct BinTreeNode{
 	T data;
 	BinTreeNode<T> *leftChild;
@@ -20,6 +23,9 @@ template <typename T>struct BinTreeNode{
 	}
 };
 
+/**
+ * @brief 二叉树（链表存储）
+ */
 template <typename T>class BinaryTree{
 public:
 	BinaryTree():root(NULL){}
@@ -58,12 +64,15 @@ public:
 	BinTreeNode<T> *getRoot()const{
 		return root;
 	}
+	/// @brief 前序遍历
 	void PreOrder(void (*visit)(BinTreeNode<T> *t)){
 		PreOrder(root, visit);
 	}
+	/// @brief 中序遍历
 	void InOrder(void (*visit)(BinTreeNode<T> *t)){
 		InOrder (root, visit);
 	}
+	/// @brief 后序遍历
 	void PostOrder(void (*visit)(BinTreeNode<T> *t)){
 		PostOrder(root, visit);
 	}	
@@ -75,18 +84,24 @@ public:
 		CreateCompBinTree(CBT, num, 0, root);
 	}
 	//for E530
-	void printBinTree(ostream &out = cout){//按广义表打印
+	/// @brief 按广义表输出
+	void printBinTree(ostream &out = cout){
 		printBinTree(root, out);
 	}	
-	void Output(ostream &out = cout){//按缩格文本输出
+	/// @brief 按缩格文本输出
+	void Output(ostream &out = cout){
 		out << "The structure of the binary tree is:\n";
 		Output(root, string(" "), out);
 		out << endl;
 	}
-	void levelOrder(void (*visit)(BinTreeNode<T> *t));//层次序遍历
-	void PreOrder1(void (*visit) (BinTreeNode<T> *t));//非递归前序遍历
-	void InOrder1(void (*visit) (BinTreeNode<T> *t));//非递归中序遍历
-	void PostOrder1(void (*visit) (BinTreeNode<T> *t));//非递归后序遍历
+	/// @brief 层次序遍历
+	void levelOrder(void (*visit)(BinTreeNode<T> *t));
+	/// @brief 非递归前序遍历
+	void PreOrder1(void (*visit) (BinTreeNode<T> *t));
+	/// @brief 非递归中序遍历
+	void InOrder1(void (*visit) (BinTreeNode<T> *t));
+	/// @brief 非递归后序遍历
+	void PostOrder1(void (*visit) (BinTreeNode<T> *t));
 	friend istream& operator >> (istream &in, BinaryTree<T> &Tree){//输入二叉树
 		Tree.CreateBinTree(in, Tree.root);
 		return in;
@@ -99,22 +114,37 @@ public:
 	}
 protected:
 	BinTreeNode<T> *root;		//二叉树的根指针
-	T RefValue;					//数据输入停止标志
-	void CreateBinTree(istream &in, BinTreeNode<T> *& subTree);//递归建立二叉树
-	void CreateCompBinTree(T *CBT, int num, int rt, BinTreeNode<T> *& subTree);//建立完全二叉树
-	void printBinTree(BinTreeNode<T> *subTree, ostream &out);//按广义表打印
-	void Output(BinTreeNode<T> *subTree, string str, ostream &out);//按目录结构方式输出二叉树
-	bool Insert(BinTreeNode<T> *& subTree, T &x);//在结点的某子树插入数据为x的结点
-	void destroy(BinTreeNode<T> *& subTree) ;//清除子二叉树
-	bool Find(BinTreeNode<T> *subTree, T &x)const;//在子树中寻找数据为x的结点
-	BinTreeNode<T> *Copy(BinTreeNode<T> *r);//复制二叉树r
-	int Height(BinTreeNode<T> *subTree)const ;//树高
-	int Size(BinTreeNode<T> *subTree)const;//树的节点数
-	BinTreeNode<T> *Parent(BinTreeNode<T> *subTree, BinTreeNode<T> *t) ;//在子树中找父结点
-	void Traverse(BinTreeNode<T> *subTree, ostream &out);//遍历输出
-	void PreOrder(BinTreeNode<T> *subTree, void (*visit)(BinTreeNode<T> *t));//前序遍历
-	void InOrder(BinTreeNode<T> *subTree, void (*visit)(BinTreeNode<T> *t));//中序遍历
-	void PostOrder(BinTreeNode<T> *subTree, void (*visit)(BinTreeNode<T> *t));//后序遍历
+	T RefValue;				//数据输入停止标志
+	/// @brief 递归建立二叉树
+	void CreateBinTree(istream &in, BinTreeNode<T> *& subTree);
+	/// @brief 建立完全二叉树
+	void CreateCompBinTree(T *CBT, int num, int rt, BinTreeNode<T> *& subTree);
+	/// @brief 按广义表打印
+	void printBinTree(BinTreeNode<T> *subTree, ostream &out);
+	/// @brief 按目录结构方式输出二叉树
+	void Output(BinTreeNode<T> *subTree, string str, ostream &out);
+	/// @brief 在结点的某子树插入数据为x的结点
+	bool Insert(BinTreeNode<T> *& subTree, T &x);
+	/// @brief 清除子二叉树
+	void destroy(BinTreeNode<T> *& subTree) ;
+	/// @brief 在子树中寻找数据为x的结点
+	bool Find(BinTreeNode<T> *subTree, T &x)const;
+	/// @brief 复制二叉树r
+	BinTreeNode<T> *Copy(BinTreeNode<T> *r);
+	/// @brief 树高
+	int Height(BinTreeNode<T> *subTree)const ;
+	/// @brief 树的节点数
+	int Size(BinTreeNode<T> *subTree)const;
+	/// @brief 在子树中找父结点
+	BinTreeNode<T> *Parent(BinTreeNode<T> *subTree, BinTreeNode<T> *t) ;
+	/// @brief 遍历输出
+	void Traverse(BinTreeNode<T> *subTree, ostream &out);
+	/// @brief 前序遍历
+	void PreOrder(BinTreeNode<T> *subTree, void (*visit)(BinTreeNode<T> *t));
+	/// @brief 中序遍历
+	void InOrder(BinTreeNode<T> *subTree, void (*visit)(BinTreeNode<T> *t));
+	/// @brief 后序遍历
+	void PostOrder(BinTreeNode<T> *subTree, void (*visit)(BinTreeNode<T> *t));
 };
 
 template <typename T>void BinaryTree<T>::CreateBinTree(istream &in, BinTreeNode<T> *& subTree){//私有函数: 以递归方式建立二叉树。

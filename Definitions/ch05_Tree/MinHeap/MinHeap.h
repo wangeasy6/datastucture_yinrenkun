@@ -5,6 +5,7 @@
 using namespace std;
 const int DefaultSize=50;
 
+/// @brief 最小堆
 template </*class T*/typename Item> class MinHeap{// T为关键码的数据类型，Item为记录的结构类型
 public:
 	MinHeap(int sz = DefaultSize);//构造函数：建立空堆

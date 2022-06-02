@@ -1,7 +1,7 @@
 #ifndef THREADTREE
 #define THREADTREE
 
-// 线索二叉树的结点类
+/// @brief 线索二叉树结点 <*lChild, ltag, data, rtag, *rChild>
 template <typename T>struct ThreadNode{
 	int ltag, rtag;	//线索标志
 	ThreadNode<T> *leftChild, *rightChild; //线索或子女指针
@@ -15,7 +15,7 @@ template <typename T>struct ThreadNode{
 	}
 };
 
-// 线索二叉树类
+/// @brief 中序线索二叉树
 template <typename T>class ThreadTree{
 protected:
 	ThreadNode<T> *root;
@@ -127,7 +127,7 @@ template<typename T>void ThreadTree<T>::InitThreadTree(){
 		else cout << "error! please reinput again!"  << endl;
 	}
 	cout << "please enter link between nodes, one existed and one to be inserted" << endl;
-    cout << "e.g (Parent) (leftChild) l or (Parent) (rightChild) r" << endl;
+    cout << "Format: <Parent> <Child> <r/l>(Break:0 0 $)" << endl;
 	//输入除根外的所有结点，要求elem1为已加入的结点
 	//elem2为新建结点，且二者子女关系
 	while(1){

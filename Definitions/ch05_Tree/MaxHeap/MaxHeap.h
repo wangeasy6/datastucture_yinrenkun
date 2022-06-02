@@ -5,6 +5,7 @@
 using namespace std;
 const int DefaultSize=50;
 
+/// @brief 最大堆
 template <typename E/*,class K*/>class MaxHeap{	// K为关键码的数据类型，E为记录的结构类型
 public:
 	MaxHeap(int sz = DefaultSize);//构造函数：建立空堆

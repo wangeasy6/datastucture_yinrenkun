@@ -5,6 +5,7 @@
 #include "SeqQueue.h"
 using namespace std;
 
+/// @brief 树结点 <data, *firstChild, *nextSibing>
 template <typename T>struct TreeNode{
 	T data;
 	TreeNode<T> *firstChild, *nextSibling;
@@ -14,6 +15,7 @@ template <typename T>struct TreeNode{
 	}
 };
 
+/// @brief 树
 template <typename T>class Tree{
 public:
 	Tree(){
@@ -72,8 +74,16 @@ public:
 	void reSetCurrent(){		//将current重新指向根节点	
 		current = root;
 	}
-	friend istream& operator >> (istream &in, Tree<T> &tree); //tree不可误作Tree
-	friend ostream& operator << (ostream &out, Tree<T> &tree);//因为类模板的友元函数是函数模板，必须在此声明，在类外定义
+	friend istream& operator >> (istream &in, Tree<T> &tree)
+	{
+		tree.CreateTree(in,tree.root);
+		return in;
+	} //tree不可误作Tree
+	friend ostream& operator << (ostream &out, Tree<T> &tree)
+	{
+		tree.IntendedText(out);
+		return out;
+	}
 private:
 	TreeNode<T> *root, *current;
 	bool Find(TreeNode<T> *p, T value);		//在以p为根的树中搜索value
@@ -89,15 +99,15 @@ private:
 	T RefValue;					//数据输入停止标志
 };
 
-template <typename T>  istream& operator >> (istream &in, Tree<T> &tree){
-	tree.CreateTree(in,tree.root);
-	return in;
-}
+// template <typename T>  istream& operator >> (istream &in, Tree<T> &tree){
+// 	tree.CreateTree(in,tree.root);
+// 	return in;
+// }
 
-template <typename T>  ostream& operator << (ostream &out, Tree<T> &tree){
-	tree.IntendedText(out);
-	return out;
-}
+// template <typename T>  ostream& operator << (ostream &out, Tree<T> &tree){
+// 	tree.IntendedText(out);
+// 	return out;
+// }
 
 template <typename T> bool Tree<T>::Root(){		//让树的根结点成为树的当前结点
 	if (root == NULL){
@@ -219,7 +229,7 @@ template <typename T>bool Tree<T>::Find(TreeNode <T> *p, T value){
 	return result;
 }
 
-template<typename T>void Tree<T>::RemovesubTree(TreeNode<T> *p){	//私有函数: 若指针subTree不为空, 则删除根为subTree的子树
+template<typename T>void Tree<T>::RemovesubTree(TreeNode<T> *subTree){	//私有函数: 若指针subTree不为空, 则删除根为subTree的子树
 	if (subTree){
 		RemovesubTree(subTree->firstChild); 
  	    RemovesubTree(subTree->nextSibling);

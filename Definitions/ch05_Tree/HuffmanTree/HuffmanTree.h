@@ -5,7 +5,7 @@
 #include<string>
 using namespace std;
 
-//Huffman树结点的类定义
+/// @brief Huffman树结点
 template <typename T, typename E>struct HuffmanNode{
 	E data;
 	HuffmanNode<T,E> *leftChild, *rightChild, *parent;
@@ -30,7 +30,7 @@ template <typename T, typename E>struct HuffmanNode{
 	}
 };
 
-//Huffman树类定义
+/// @brief Huffman树
 template <typename T, typename E>class HuffmanTree{
 public:
 	HuffmanTree(E w[], int n);
